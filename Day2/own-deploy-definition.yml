@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: own-deploy
+  namespace: jo-ns
+  labels:
+    name: own-label
+    type: back-end
+    mylabel: nslabel
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      name: owndeploy
+      namespace: jo-ns
+      labels:
+        name: own-label
+        type: back-end
+        mylabel: nslabel
+    spec:
+      containers:
+        - name: own-demo
+          image: gendockerxplorer/trainingday1:httpd_latest
+      nodeSelector:
+        mylabel: nslabel
+
+  replicas: 2
+  selector:
+    matchLabels:
+      name: own-label
+      type: back-end
+      mylabel: nslabel
+

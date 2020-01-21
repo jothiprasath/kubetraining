@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+  namespace: jo-ns
+  labels:
+    name: rs-label
+    type: back-end
+    mylabel: nslabel
+spec:
+  template:
+    metadata:
+      name: nginx
+      namespace: jo-ns
+      labels:
+        name: rs-label
+        type: back-end
+        mylabel: nslabel
+    spec:
+      containers:
+        - name: nginx-demo
+          image: nginx
+      nodeSelector:
+        mylabel: nslabel
+
+  replicas: 3
+  selector:
+    matchLabels:
+      name: rs-label
+      type: back-end
+      mylabel: nslabel
+

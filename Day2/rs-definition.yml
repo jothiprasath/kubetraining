@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-rs
+  namespace: jo-ns
+  labels:
+    name: rs-label
+    type: back-end
+spec:
+  template:
+    metadata:
+      name: nginx
+      namespace: jo-ns
+      labels:
+        name: rs-label
+        type: back-end
+    spec:
+      containers:
+        - name: nginx-demo
+          image: nginx
+  replicas: 3
+  selector:
+    matchLabels:
+      name: rs-label
+      type: back-end
+
