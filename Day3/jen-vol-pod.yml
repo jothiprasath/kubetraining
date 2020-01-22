@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jen-vol-demo
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: jenkins
+    image: jenkins/jenkins:lts
+    volumeMounts:
+    - name: jenkins-home
+      mountPath: /var/jenkins_home
+  volumes:
+  - name: jenkins-home
+    emptyDir: {}  
