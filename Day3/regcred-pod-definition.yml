@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: private-demo
+spec:
+  containers:
+  - name: private-demo-container
+    image: gendockerxplorer/trainingday1:httpd_latest
+  imagePullSecrets:
+  - name: regcred
