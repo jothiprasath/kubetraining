@@ -1,0 +1,30 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: myrole-name
+  namespace: kubernetes-dashboard
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "secrets", "configmaps", "services", "deployments"]
+    verbs: ["get", "list", "update", "delete"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: myrolebinding
+  namespace: kubernetes-dashboard
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: myrole-name
+subjects:
+  - kind: ServiceAccount
+    name: ravi-user
+    namespace: kubernetes-dashboard
+

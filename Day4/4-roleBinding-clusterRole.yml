@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-secrets
+  namespace: jo-ns
+subjects:
+- kind: User
+  name: centos #Case Sensitive
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole #Role or cluster role
+  name: secret-reader #Must match name of role or clusrerRole to bind
+  apiGroup: rbac.authorization.k8s.io
